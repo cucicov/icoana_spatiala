@@ -5,11 +5,29 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 GPIO.setup(26, GPIO.OUT)
 url = "https://api.wheretheiss.at/v1/satellites/25544"
-currentLat = 44.440567
-currentLon = 26.103563
+currentLat = 46.767265
+currentLon = 23.590519
 currRadiansLat = currentLat * math.pi / 180
 currRadiansLon = currentLon * math.pi / 180
 f = open("/home/pi/log.txt", "w+")
+
+print("all OK. starting program.")
+GPIO.output(26, GPIO.HIGH)
+time.sleep(0.25)
+GPIO.output(26, GPIO.LOW)
+time.sleep(0.25)
+GPIO.output(26, GPIO.HIGH)
+time.sleep(0.25)
+GPIO.output(26, GPIO.LOW)
+time.sleep(0.25)
+GPIO.output(26, GPIO.HIGH)
+time.sleep(0.25)
+GPIO.output(26, GPIO.LOW)
+time.sleep(0.25)
+GPIO.output(26, GPIO.HIGH)
+time.sleep(0.25)
+GPIO.output(26, GPIO.LOW)
+
 while 1:
     time.sleep(1)
     lat = 0
@@ -20,12 +38,34 @@ while 1:
         f.flush()
         print(str(response.getcode()) + ":::")
     except:
+        print("no response from url");
+        GPIO.output(26, GPIO.HIGH)
+        time.sleep(1)
+        GPIO.output(26, GPIO.LOW)
+        time.sleep(1)
+        GPIO.output(26, GPIO.HIGH)
+        time.sleep(1)
+        GPIO.output(26, GPIO.LOW)
+        time.sleep(1)
+        GPIO.output(26, GPIO.HIGH)
+        time.sleep(1)
+        GPIO.output(26, GPIO.LOW)
+        time.sleep(5)
         pass
     try:
         data = json.loads(response.read())
         lat = data['latitude']
         lon = data['longitude']
     except:
+        print("error parsing iss JSON");
+        GPIO.output(26, GPIO.HIGH)
+        time.sleep(1)
+        GPIO.output(26, GPIO.LOW)
+        time.sleep(1)
+        GPIO.output(26, GPIO.HIGH)
+        time.sleep(1)
+        GPIO.output(26, GPIO.LOW)
+        time.sleep(5)
         pass
     radiansLat = lat * math.pi / 180
     radiansLon = lon * math.pi / 180
