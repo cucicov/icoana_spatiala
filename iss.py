@@ -5,8 +5,8 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 GPIO.setup(26, GPIO.OUT)
 url = "https://api.wheretheiss.at/v1/satellites/25544"
-currentLat = 46.767265
-currentLon = 23.590519
+currentLat = 44.440021
+currentLon = 26.097865
 currRadiansLat = currentLat * math.pi / 180
 currRadiansLon = currentLon * math.pi / 180
 f = open("/home/pi/log.txt", "w+")
